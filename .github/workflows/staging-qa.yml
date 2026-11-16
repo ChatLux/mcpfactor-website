@@ -6,7 +6,7 @@ permissions: {}
 jobs:
   verify:
     runs-on: ubuntu-latest
-    timeout-minutes: 4
+    timeout-minutes: 6
     steps:
       - name: Check authoritative and recursive DNS
         run: |
@@ -25,7 +25,7 @@ jobs:
           python3 - <<'PY'
           from concurrent.futures import ThreadPoolExecutor
           from urllib.request import urlopen, Request
-          import ssl, socket
+          import ssl, socket, re, time
           base = 'https://mcpfactor.com/'
           pages = {
               '': 'Ai Systems Architect',
@@ -37,6 +37,7 @@ jobs:
               'contact/': 'Ai Project Consultation',
           }
           checks = [(base + p, base + p, expected) for p, expected in pages.items()]
+          checks += [(base + f'assets/danny-monzon-buzz-tv{i}.jpg', base + f'assets/danny-monzon-buzz-tv{i}.jpg', '') for i in range(1, 8)]
           checks += [
               ('http://mcpfactor.com/', base, 'Ai Systems Architect'),
               ('http://www.mcpfactor.com/', base, 'Ai Systems Architect'),
@@ -51,15 +52,23 @@ jobs:
               url, expected_url, marker = record
               try:
                   with urlopen(Request(url, headers={'User-Agent': 'MCP Factor production QA'}), timeout=14) as r:
-                      matched = (not marker or marker in r.read(120000).decode(errors='replace'))
-                      ok = (r.status == 200 and r.url == expected_url and matched)
-                      print(f'{"PASS" if ok else "FAIL"} {url} {r.status} {r.url} content={matched}', flush=True)
+                      content_type = r.headers.get_content_type()
+                      body = r.read(150000).decode(errors='replace') if content_type in ('text/html', 'text/css') else ''
+                      matched = not marker or marker in body
+                      mixed = bool(re.search(r"""(?:\bsrc\s*=|\burl\(|<link[^>]*href\s*=)\s*['\"]?http://""", body, re.I))
+                      ok = r.status == 200 and r.url == expected_url and matched and not mixed
+                      print(f'{"PASS" if ok else "FAIL"} {url} {r.status} {r.url} content={matched} mixed-source={mixed}', flush=True)
                       return ok
               except Exception as e:
                   print(f'FAIL {url} {e}', flush=True)
                   return False
-          with ThreadPoolExecutor(8) as pool:
-              outcomes = list(pool.map(check, checks))
+          for attempt in range(10):
+              print(f'Production check attempt {attempt + 1}', flush=True)
+              with ThreadPoolExecutor(8) as pool:
+                  outcomes = list(pool.map(check, checks))
+              if all(outcomes) or attempt == 9:
+                  break
+              time.sleep(18)
           for host in ('mcpfactor.com', 'www.mcpfactor.com', 'app.mcpfactor.com'):
               try:
                   with socket.create_connection((host, 443), timeout=10) as sock:
