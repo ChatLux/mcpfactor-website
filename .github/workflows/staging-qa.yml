@@ -16,7 +16,7 @@ jobs:
           base = 'https://chatlux.github.io/mcpfactor-website/'
           paths = ['', 'solutions/', 'media/', 'blog/', 'blog/agentifying-a-lengthy-static-form/',
                    'blog/dependency-chain-demystified/', 'contact/', 'shared/site.css',
-                   'shared/site.js', 'assets/manychat-emerging-agency-award-2020.png'] + [
+                   'shared/site.js', 'shared/articles.css', 'assets/manychat-emerging-agency-award-2020.png'] + [
                        f'assets/danny-monzon-buzz-tv{i}.jpg' for i in range(1, 8)]
           def check(path):
               with urlopen(Request(base + path, headers={'User-Agent': 'MCP Factor staging QA'}), timeout=25) as r:
@@ -29,7 +29,7 @@ jobs:
           for item in 'mcpfactor.com NS' 'mcpfactor.com A' 'mcpfactor.com AAAA' 'mcpfactor.com MX' 'www.mcpfactor.com CNAME' 'www.mcpfactor.com A' 'app.mcpfactor.com CNAME' 'app.mcpfactor.com A'; do
             read -r host record <<< "$item"
             echo "$host $record"
-            dig +short "$host" "$record"
+            dig @ns55.domaincontrol.com +noall +answer "$host" "$record"
           done
           for url in https://app.mcpfactor.com/ https://calendly.com/dmchat; do
             curl -L -sS -o /dev/null --max-time 25 -w '%{http_code} %{url_effective}\n' "$url" || true
@@ -62,6 +62,7 @@ jobs:
                   try {
                     const response = await page.goto(base + route, { waitUntil: 'domcontentloaded', timeout: 25000 });
                     if (!response?.ok() || page.url() !== base + route) problems.add(tag(route) + ' unexpected navigation');
+                    await page.waitForFunction(site => [...document.querySelectorAll('link[rel=stylesheet]')].every(link => !link.href.startsWith(site) || link.sheet), base, { timeout: 12000 });
                     await page.evaluate(() => { for (const img of document.images) img.loading = 'eager'; });
                     await page.waitForFunction(() => [...document.images].every(img => img.complete), { timeout: 12000 });
                     const data = await page.evaluate(site => ({
@@ -72,6 +73,14 @@ jobs:
                       nav: [...document.querySelectorAll('a[href]')].map(a => a.href),
                       video: [...document.querySelectorAll('iframe')].some(f => f.src.includes('youtube.com/embed/'))
                     }), base);
+                    if (data.overflow > 2) {
+                      const overflow = await page.evaluate(() => [...document.querySelectorAll('body *')].map(el => {
+                        const rect = el.getBoundingClientRect();
+                        const style = getComputedStyle(el);
+                        return [el.tagName, el.className, Math.round(rect.left), Math.round(rect.right), el.scrollWidth, el.clientWidth, style.overflowX];
+                      }).filter(el => el[3] > innerWidth + 2 && el[3] > el[2]));
+                      console.log(tag(route), 'overflow elements', JSON.stringify(overflow.slice(0, 35)));
+                    }
                     if (!data.heading || data.overflow > 2) problems.add(tag(route) + ' heading/overflow ' + JSON.stringify({ heading: data.heading, overflow: data.overflow }));
                     for (const item of data.css) problems.add(tag(route) + ' missing stylesheet ' + item);
                     for (const img of data.images.filter(i => !i.ok || !i.alt)) problems.add(tag(route) + ' image ' + JSON.stringify(img));
