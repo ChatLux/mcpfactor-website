@@ -1,0 +1,16 @@
+
+/* MCP Factor design tokens, Media page v2 approved Nov 16, 2026 */
+:root {
+  --color-ink: #071620;
+  --color-navy: #06111b;
+  --color-cyan: #1fe2e9;
+  --color-cyan-dark: #007d87;
+  --color-paper: #f5f6f6;
+  --color-muted: #64727f;
+  --color-line: #dce3e6;
+  --font-body: 'DM Sans', sans-serif;
+  --font-display: 'Playfair Display', Georgia, serif;
+  --font-ui: 'Manrope', sans-serif;
+  --radius-card: 18px;
+  --container-width: 1200px;
+}
