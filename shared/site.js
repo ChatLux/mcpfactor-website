@@ -17,3 +17,51 @@
     document.getElementById('feature-grid')?.setAttribute('aria-label', type === 'all' ? 'All featured media' : `Featured ${type} appearances`);
   }));
 })();
+
+/* Keep the existing navigation compact on small screens. */
+(() => {
+  const toggle = document.querySelector('.nav-toggle');
+  if (!toggle) return;
+
+  const header = toggle.closest('.nav');
+  const resources = header.querySelector('.resources-menu');
+  const summary = resources.querySelector('summary');
+  const mobile = matchMedia('(max-width: 950px)');
+
+  const closeMenu = () => {
+    resources.open = false;
+    toggle.setAttribute('aria-expanded', 'false');
+  };
+  const setViewport = () => {
+    closeMenu();
+    toggle.hidden = !mobile.matches;
+  };
+
+  header.classList.add('has-menu');
+  setViewport();
+  mobile.addEventListener('change', setViewport);
+
+  toggle.addEventListener('click', () => {
+    if (toggle.getAttribute('aria-expanded') === 'true') {
+      closeMenu();
+    } else {
+      toggle.setAttribute('aria-expanded', 'true');
+    }
+  });
+
+  document.addEventListener('click', event => {
+    if (!resources.contains(event.target)) resources.open = false;
+    if (!header.contains(event.target)) closeMenu();
+  });
+
+  header.addEventListener('keydown', event => {
+    if (event.key !== 'Escape') return;
+    if (resources.open) {
+      resources.open = false;
+      summary.focus();
+    } else if (toggle.getAttribute('aria-expanded') === 'true') {
+      closeMenu();
+      toggle.focus();
+    }
+  });
+})();

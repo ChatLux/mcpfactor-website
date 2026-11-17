@@ -19,3 +19,27 @@
 
 /* Original editorial artwork used in long-form MCP Factor articles */
 .article-figure{margin:28px 0 38px}.article-figure img{display:block;max-width:100%;width:100%;height:auto;border-radius:14px;border:1px solid #dde5e8}.article-pullquote{font:700 clamp(24px,3.2vw,34px)/1.35 'Playfair Display',Georgia,serif;color:#0b4050;border-left:4px solid #07bbc2;padding:8px 0 8px 24px;margin:35px 0}.article-lastline{font-size:27px;font-weight:800;color:#0a4656}
+
+.article-share {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 28px;
+  font-weight: 700;
+}
+.article-share a {
+  display: grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  color: var(--cyan-dark);
+}
+.article-share a:hover {
+  background: #dff8f8;
+}
+.article-share svg {
+  width: 20px;
+  height: 20px;
+}
