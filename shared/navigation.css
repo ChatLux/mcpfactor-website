@@ -1,0 +1,136 @@
+html {
+  scroll-padding-top: 90px;
+}
+
+.nav {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+}
+
+.nav-toggle {
+  background: transparent;
+  border: 1px solid #365361;
+  border-radius: 8px;
+  color: inherit;
+  cursor: pointer;
+  padding: 8px 12px;
+}
+
+.resources-menu {
+  position: relative;
+  white-space: nowrap;
+}
+
+.resources-menu summary {
+  cursor: pointer;
+  padding: 8px 0;
+}
+
+.resources-menu summary:focus-visible {
+  outline: 3px solid var(--cyan);
+  outline-offset: 4px;
+}
+
+.resources-links {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background: var(--navy);
+  border: 1px solid #365361;
+  border-radius: 8px;
+}
+
+.resources-links a {
+  display: block;
+  padding: 12px 16px;
+}
+
+.footer-feature,
+.footer-contact {
+  display: block;
+  text-align: center;
+}
+
+.footer-feature {
+  margin-bottom: 24px;
+}
+
+.foot .cta {
+  color: #001318;
+}
+
+.social-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 18px;
+  list-style: none;
+  padding: 0;
+}
+
+.foot .social-links {
+  justify-content: center;
+  margin: 16px auto;
+}
+
+.social-links a:hover {
+  text-decoration: underline;
+}
+
+.contact-main .social-links a {
+  color: var(--cyan-dark);
+  font-weight: 700;
+}
+
+@media (max-width: 950px) {
+  html {
+    scroll-padding-top: 72px;
+  }
+
+  .nav .nav-inner {
+    flex-wrap: wrap;
+    gap: 10px;
+    min-height: 64px;
+    padding: 10px 0;
+  }
+
+  .nav .brand {
+    font-size: clamp(18px, 4.9vw, 23px);
+  }
+
+  .nav .brand .sep {
+    margin-inline: 5px;
+  }
+
+  .nav .nav-links {
+    flex: 1 0 100%;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    overflow: visible;
+    gap: 8px 18px;
+    max-height: 60vh;
+  }
+
+  .nav.has-menu .nav-links {
+    display: none;
+  }
+
+  .nav.has-menu .nav-toggle[aria-expanded="true"] + .nav-links {
+    display: flex;
+  }
+
+  .nav .nav-links a[aria-current="page"] {
+    padding: 4px 0;
+  }
+
+  .resources-links {
+    position: static;
+  }
+}
+
+@media (951px <= width <= 1100px) {
+  .nav .nav-inner,
+  .nav .nav-links {
+    gap: 16px;
+  }
+}
