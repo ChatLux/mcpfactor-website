@@ -59,6 +59,9 @@
   font-weight: 700;
   text-decoration: underline;
 }
+#selected-engagements {
+  background: #e8f3fc;
+}
 .engagement-list {
   border-left: 4px solid #007c85;
   padding-left: clamp(16px, 4vw, 36px);
