@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>How to Recreate Your Custom GPT Using MCP Factor | Danny Monzon</title>
+<meta name="description" content="An eight-step guide to rebuilding your Ai assistant with more deployment options, business integrations, and control over how it operates.">
+<link rel="canonical" href="https://mcpfactor.com/blog/recreate-custom-gpt-mcp-factor/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="How to Recreate Your Custom GPT Using MCP Factor">
+<meta property="og:description" content="An eight-step guide to rebuilding your Ai assistant with more deployment options, business integrations, and control over how it operates.">
+<meta name="theme-color" content="#06141f">
+<link rel="stylesheet" href="../../shared/tokens.css"><link rel="stylesheet" href="../../shared/site.css"><link rel="stylesheet" href="../../shared/home.css"><link rel="stylesheet" href="../../shared/inner.css"><link rel="stylesheet" href="../../shared/articles.css"><link rel="stylesheet" href="../../shared/navigation.css">
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="nav"><div class="container nav-inner"><a class="brand" href="../../" aria-label="Danny Monzon and MCP Factor home">Danny Monzon <span class="sep">|</span> MCP F<span>Λ</span>CTOR</a><button class="nav-toggle" type="button" aria-controls="main-navigation" aria-expanded="false" hidden>Menu</button><nav id="main-navigation" class="nav-links" aria-label="Main navigation"><a href="../../">Home</a><a href="../../solutions/">Solutions</a><a href="../../media/">Media</a><a href="../../blog/" aria-current="page">Blog</a><a href="../../contact/">Contact</a><details class="resources-menu"><summary>Resources</summary><div class="resources-links"><a href="https://app.mcpfactor.com/" target="_blank" rel="noopener noreferrer">MCP Factor ↗</a></div></details></nav><a class="cta" href="https://calendly.com/dmchat" target="_blank" rel="noopener noreferrer">Book a Consultation →</a></div></header>
+<main id="main">
+<div class="article-top"><div class="container article-top-wrap"><a class="backlink" href="../../blog/">← Back to Blog</a><div class="article-byline"><a href="https://app.mcpfactor.com/">MCP Factor</a> · Danny Monzon</div><h1>How to Recreate Your Custom GPT Using MCP Factor</h1><p>An 8-step guide to rebuilding your Ai assistant with more deployment options, business integrations, and control over how it operates.</p></div></div>
+<article class="article-content"><div class="article-main">
+<p>OpenAI is retiring Custom GPTs on December 11, 2026. If you've invested time building one, that doesn't mean your instructions, knowledge, or business logic need to go to waste.</p>
+<p>You can recreate much of that functionality (and then some!) using <a href="https://app.mcpfactor.com/" target="_blank" rel="noopener noreferrer">MCP Factor</a>,</p>
+<p>A true custom agentic solution.</p>
+<p>Ready?</p>
+
+<h2>Step 1. Collect Your Custom GPT's Components</h2>
+<p>Before doing anything, open your existing GPT in ChatGPT and review its configuration.</p>
+<p>Preserve the following:</p>
+<ul>
+<li><strong>Instructions:</strong> Your system prompt, rules, personality, restrictions, and response formatting.</li>
+<li><strong>Knowledge:</strong> Uploaded PDFs, documents, reference files, and FAQs.</li>
+<li><strong>Conversation starters:</strong> Examples of the tasks your GPT was designed to perform.</li>
+<li><strong>Custom Actions:</strong> API endpoints, authentication requirements, and OpenAPI schemas.</li>
+<li><strong>Test prompts:</strong> Five to ten questions you can use to evaluate behavior.</li>
+</ul>
+<p>Copy everything you have permission to reuse into a separate document.</p>
+<p><strong>Important:</strong> Your previous GPT conversations and custom Actions will not automatically transfer to MCP Factor.</p>
+
+<h2>Step 2. Create Your Agent</h2>
+<p>Visit <a href="https://app.mcpfactor.com/" target="_blank" rel="noopener noreferrer">app.mcpfactor.com</a> and sign in or create an account. It’s free!</p>
+<ol>
+<li>Open <strong>Agents</strong> from the dashboard.</li>
+<li>Create a new agent.</li>
+<li>Give it a name and select its timezone.</li>
+<li>Open <strong>Agent Settings → Prompt Engineering</strong>.</li>
+<li>Paste your Custom GPT's system instructions.</li>
+<li>Configure the welcome message, personality, and behavior.</li>
+<li>Save your configuration.</li>
+</ol>
+<p>You can also use the <strong>Describe your agent</strong> feature to generate an initial configuration from a plain-English description.</p>
+<p>Your existing prompt is a starting point, not a guarantee of identical behavior. Test and refine it.</p>
+
+<h2>Step 3. Choose Your Ai Model</h2>
+<p>Your Custom GPT used OpenAI's models. MCP Factor supports multiple model providers, including OpenAI, Anthropic Claude, xAI Grok, and Google Gemini.</p>
+<p>Within your agent's model settings:</p>
+<ol>
+<li>Choose your preferred provider and model.</li>
+<li>Configure the required API credentials or supported billing arrangement.</li>
+<li>Adjust available model settings for your use case.</li>
+<li>Test the same prompts against your original GPT.</li>
+</ol>
+<p>You can continue using OpenAI models without requiring your customers to interact through the ChatGPT interface. Plus you can select your backup models in case the primary model becomes unavailable!</p>
+<p>Model availability, pricing, and supported features vary by provider.</p>
+
+<h2>Step 4. Restore Your Knowledge Base</h2>
+<p>Navigate to:</p>
+<p><strong>Agent Settings → Prompt Engineering → Knowledge Base</strong></p>
+<p>Upload the reference files you preserved from your Custom GPT.</p>
+<p>Supported native formats include PDF, TXT, Markdown, HTML, JSON, CSV, XLSX, and XLS.</p>
+<p>The documented native upload limits are:</p>
+<ul>
+<li>25 files per agent</li>
+<li>50 MB maximum per file</li>
+<li>500 MB combined</li>
+<li>Up to 10 files per upload</li>
+</ul>
+<p>Wait until the documents finish indexing before testing. Upload completion doesn't necessarily mean the knowledge is ready.</p>
+<p>Ask questions that require information from the uploaded documents and check that the answers are accurate.</p>
+
+<h2>Step 5. Rebuild Your Custom Actions as Functions</h2>
+<p>This is where you can move beyond a conversational assistant.</p>
+<p>If your Custom GPT used Actions to interact with external services, you'll need to recreate those integrations.</p>
+<p>Navigate to:</p>
+<p><strong>Tools → Functions → + New</strong></p>
+<p>MCP Factor functions can support actions such as:</p>
+<ul>
+<li>Capturing and updating customer information</li>
+<li>Syncing data with Google Sheets</li>
+<li>Sending webhooks and notifications</li>
+<li>Triggering automation flows</li>
+<li>Updating contact fields and tags</li>
+<li>Initiating follow-up sequences</li>
+<li>And more..</li>
+</ul>
+<p>Create your function, define its inputs and actions, then assign it to the appropriate agent.</p>
+<p>For API integrations, verify the endpoint, authentication, permissions, request structure, and expected responses.</p>
+<p>Never assume an old GPT Action will work without adaptation and testing.</p>
+
+<h2>Step 6. Connect Business Workflows</h2>
+<p>Your recreated agent can become part of a larger business process.</p>
+<p>Depending on your configuration, you can connect it to CRM pipelines, payment systems, booking calendars, voice services, messaging channels, and mobile wallet pass workflows.</p>
+<p>For example, instead of merely explaining a loyalty program, your agent could be configured to:</p>
+<ol>
+<li>Identify an existing customer.</li>
+<li>Retrieve permitted customer information.</li>
+<li>Check loyalty or membership records.</li>
+<li>Trigger an eligible offer or wallet-pass workflow.</li>
+<li>Update the contact record.</li>
+<li>Initiate an appropriate follow-up.</li>
+</ol>
+<p>The actual functions require the corresponding integrations, authorization, and workflow configuration.</p>
+
+<h2>Step 7. Deploy Your Agent</h2>
+<p>Open your agent's <strong>Channels</strong> tab.</p>
+<p>Under <strong>Web Chat</strong>, you'll find options for sharing or embedding your agent.</p>
+<p>You can:</p>
+<ul>
+<li>Share a direct chat link.</li>
+<li>Add a chat launcher to your website.</li>
+<li>Embed the agent within a webpage.</li>
+<li>Connect supported messaging channels.</li>
+</ul>
+<p>Can you smell what we’re cooking?</p>
+<p>Customize the appearance under <strong>Agent Settings → Appearance</strong> to match your brand.</p>
+<p>Unlike a legacy Custom GPT, a website-deployed MCP Factor agent does not require customers to open ChatGPT to interact with it. True freedom!</p>
+
+<h2>Step 8. Test Before Going Live</h2>
+<p>Before publishing, run a basic quality assurance checklist.</p>
+<ul>
+<li>Does the agent follow its system instructions?</li>
+<li>Can it accurately retrieve information from its knowledge base?</li>
+<li>Does it handle unknown questions without inventing answers?</li>
+<li>Do its functions trigger correctly?</li>
+<li>Does customer information reach the intended destination?</li>
+<li>Are authentication, consent, and permissions functioning correctly?</li>
+<li>Does the website or messaging deployment work?</li>
+<li>Are conversation failures and edge cases handled appropriately?</li>
+</ul>
+
+<h2>What About Ownership?</h2>
+<p>Push your creation to GitHub. Find that integration under Settings.</p>
+<p>Keep copies of your prompts and knowledge files, understand where customer data is stored, and verify available export and migration options.</p>
+<p>The goal isn't to eliminate every vendor dependency. It's to build a system whose critical business components, customer relationships, and operational processes you can manage deliberately.</p>
+
+<h2>Ready to Rebuild?</h2>
+<p>You don't necessarily need to start over because OpenAI is retiring Custom GPTs.</p>
+<p>Preserve what you've built, recreate its core functionality, and use the opportunity to design something that does more than answer questions.</p>
+<p>Your Ai assistant can become part of a functioning business system.</p>
+<p><a href="https://app.mcpfactor.com/" target="_blank" rel="noopener noreferrer"><strong>Get started with MCP Factor</strong></a></p>
+
+<h2>Additional Resources</h2>
+<ul>
+<li>OpenAI: Custom GPT Retirement and Migration FAQ</li>
+<li>OpenAI: Creating and Editing GPTs</li>
+<li>MCP Factor: <a href="https://app.mcpfactor.com/" target="_blank" rel="noopener noreferrer">Open the Platform</a></li>
+</ul>
+<p class="article-signoff">Prepared by Danny Monzon | Ai Systems Architect &amp; Automation Specialist</p>
+<p class="article-note">Updated November 2026. Platform capabilities and interface options may change. This is a manual recreation guide, not an official OpenAI migration integration.</p>
+</div></article>
+<section class="article-next"><div class="container"><p>More from the field</p><a href="../../blog/">Explore all Insights →</a></div></section>
+</main>
+<footer class="foot"><div class="container foot-inner"><span>© 2026 MCP Factor · Danny Monzon</span><span>Built for real-world outcomes. <a href="https://app.mcpfactor.com/">Explore the platform ↗</a></span></div><ul class="social-links" aria-label="Danny Monzon on social media"><li><a href="https://www.facebook.com/dannymvp/">Facebook</a></li><li><a href="https://www.linkedin.com/in/dannymonzon/">LinkedIn</a></li><li><a href="https://www.youtube.com/@dm.digital">YouTube</a></li></ul><span class="footer-contact"><a href="../../contact/">Contact</a></span></footer>
+<script src="../../shared/site.js" defer></script>
+</body></html>
